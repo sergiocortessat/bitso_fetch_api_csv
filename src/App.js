@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import OrderBook from './FetchWebScoket';
-// import Socket from './WebSocketAPI';
 const URLBRL =  "https://api.bitso.com/v3/order_book/?book=btc_brl"
 
 
@@ -25,6 +24,7 @@ function App() {
           // },
       })
       const fetchData = await data.json()
+      console.log('--------------');
       console.log(fetchData)
       const bestBidSizes = fetchData.payload.bids.sort((a, b) => a.amount - b.amount)
       const bestBidSize = bestBidSizes[bestBidSizes.length-1]
@@ -61,12 +61,14 @@ useEffect(() => {
 
   return (
     <div className="App">
-     <p>bidSize:{bidSize.amount}</p>
-     <p>bidPrice {bidPrice.price}</p>
-     <p>askSize{askSize.amount}</p>
-     <p>askPrice{askPrice.price}</p>
-     <p>midPrice{midPrice}</p>
-     <p>midPrice{bidSpread}</p>
+    <div className="App-header">
+     <p>Bid Size:{bidSize.amount}</p>
+     <p>Bid Price: {bidPrice.price}</p>
+     <p>Ask Size: {askSize.amount}</p>
+     <p>Ask Price: {askPrice.price}</p>
+     <p>Mid Price: {midPrice}</p>
+     <p>Bid Spread: {bidSpread}</p>
+     </div>
      <OrderBook />
 </div>
 

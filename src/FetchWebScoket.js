@@ -2,21 +2,19 @@ import React, { useState, useEffect } from 'react';
 import FetchButton from './FetchButton';
 const OrderBook = () => {
   const [orders, setOrders] = useState([]);
-  const currencyPair = 'btcusd';
-//   const URLBRL =  "https://api.bitso.com/v3/order_book/?book=btc_brl"
-  // const URLMXN =  "https://api.bitso.com/v3/order_book/?book=btc_mxn"
-//   const currencyArray = currencyPair.toUpperCase().match(/.{1,3}/g);
+  const currencyPair = 'btc_mxn';
+  const types = 'trades'
 
   useEffect(() => {
     const websocket = new WebSocket('wss://ws.bitso.com');
 
     websocket.onopen = function() {
-        websocket.send(JSON.stringify({ action: 'subscribe', book: 'btc_mxn', type: 'trades' }));
+        websocket.send(JSON.stringify({ action: 'subscribe', book: currencyPair, type: types }));
     };
 
     websocket.onmessage = (event) => {
       const data = JSON.parse(event.data);
-      if (data.type === 'trades' && data.payload && orders.length < 5) {
+      if (data.type === types && data.payload) {
         const time = new Date().toLocaleString();
 
         const dataArray = [...data.payload, time] 
@@ -55,16 +53,16 @@ const OrderBook = () => {
 //   );
   return (
       <div className="order-container">
-        {orders.length === 5 && <FetchButton data={orders}/>}
+        {(orders.length >4 && <FetchButton data={orders} currencyPair={currencyPair}/>) || (<button disabled='true'>Waiting Trades</button>)}
+        <h3>Trades</h3>
+        {orders.length < 1 && <p>Waiting for a trade...</p>}
         <ul>
      {orders.map((data) => (
              <li key={data[0].i}>
-                 <p>{data[0].v}</p>
-                 <p>{data[0].a}</p>
-                 <p>{data[1]}</p>
-           
+                 <p>{'[' + data[0]['i'] + '] ' + data[0]['a'] + ' BTC @ ' + data[0]['r'] + ' MXN = ' + data[0]['v'] + ' MXN ' + 'Date: ' + data[1]}</p>
              </li>
-     ))}
+         ))}
+           
      </ul>
 
       {/* <table>
