@@ -24,7 +24,7 @@ function FetchButton({data, currencyPair}) {
 
     }
     return ( 
-        <button type="button" onClick={fetchCSV}>
+        <button className='download' type="button" onClick={fetchCSV}>
             Download Trades
         </button>
     )
