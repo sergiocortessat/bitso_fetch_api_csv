@@ -1,4 +1,4 @@
-## React Calculator App
+## Bitso-BTC-API-Feeder
 
 <p align="center">
   <img height="auto" src="customlogo.png">
@@ -6,7 +6,7 @@
 
 ## Live Version
 
-* [Live Demo](https://movie-data-base-scs.netlify.app/) 
+* [Live Demo](https://bitso-api-fetch.netlify.app/) 
 
 <br />
 
@@ -44,7 +44,7 @@
 
 ## About The Project
 
-The React movie database offers users the possibility to check on the latest trending movies there is. as well they can filter by their choice movie and check specific specs of it such as director, budget, cast and bio. 
+
 
 <br />
 
