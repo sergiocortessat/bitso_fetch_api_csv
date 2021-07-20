@@ -31,31 +31,11 @@ const OrderBook = () => {
     };
   }, [orders.length]);
   
-//   const { bids, asks } = orders;
-//   const orderRows = (arr) =>
-//     arr &&
-//     arr.map((item, index) => (
-//       <tr key={index}>
-//         <td> {item[1]} </td>
-//         <td> {item[0]} </td>
-//       </tr>
-//     ));
-//   const orderHead = (title) => (
-//     <thead>
-//       <tr>
-//         <th colSpan="2">{title}</th>
-//       </tr>
-//       <tr>
-//         <th>Amount ({currencyArray[0]})</th>
-//         <th>Price ({currencyArray[1]})</th>
-//       </tr>
-//     </thead>
-//   );
   return (
       <div className="order-container">
         {(orders.length >4 && <FetchButton data={orders} currencyPair={currencyPair}/>) || (<button className='download' disabled='true'>Waiting Trades</button>)}
         <div className='trades'>
-        <h3>Trades</h3>
+        <h3>Trades in {currencyPair.toUpperCase()}</h3>
         {orders.length < 1 && <p>Waiting for a trade...</p>}
         <ul>
      {orders.map((data) => (
@@ -68,10 +48,7 @@ const OrderBook = () => {
          ))}
      </ul>
 </div>
-      {/* <table>
-        {orderHead('Asks')}
-        <tbody>{orderRows(asks)}</tbody>
-      </table> */}
+
     </div>
   );
 };

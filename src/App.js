@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import OrderBook from './FetchWebScoket';
-const URLBRL =  "https://api.bitso.com/v3/order_book/?book=btc_brl"
+import Typewriter from 'typewriter-effect';
+import Card from './Card';
+const currentCurrency = 'btc_brl'
+const URLBRL =  `https://api.bitso.com/v3/order_book/?book=${currentCurrency}`
 
 
 function App() {
@@ -11,17 +14,11 @@ function App() {
   const [midPrice, setMidPrice]  = useState()
   const [bidSpread, setBidSpread]  = useState()
 
-  
-
-
   const fetching = async () => {
     try {
       const data = await fetch(URLBRL,{
           method: 'GET',
           mode: 'cors',
-          // headers: {
-          //     'Access-Control-Allow-Origin': '*/*',
-          // },
       })
       const fetchData = await data.json()
       console.log('--------------');
@@ -55,20 +52,41 @@ function App() {
       }
   }
 
+  const cards = [
+    {name: 'Bid Size', value: bidSize.amount, currency: 'Units'},
+  {name: 'Bid Price', value: bidPrice.price, currency: 'BRL'},
+  {name: 'Ask Size', value: askSize.amount, currency: 'Units'},
+ {name: 'Ask Price', value: askPrice.price, currency: 'BRL'},
+    {name: 'Mid Price', value: midPrice, currency: 'BRL'},
+  {name: 'Bid Spread', value: bidSpread, currency: 'BRL'},
+  ]
 useEffect(() => {
-//  fetching()
+ fetching()
  },[])
 
   return (
     <div className="App">
+      <div className='typewritter'>
+
+<h1>Check Trades in </h1>
+<Typewriter
+   options={{
+     strings: ['BTC', 'MXN', 'BRL'],
+     autoStart: true,
+     loop: true,
+   }}
+  />
+      </div>
+      <h2>General data for {currentCurrency.toUpperCase()}</h2>
     <div className="App-header">
-     <p>Bid Size:{bidSize.amount}</p>
-     <p>Bid Price: {bidPrice.price}</p>
-     <p>Ask Size: {askSize.amount}</p>
-     <p>Ask Price: {askPrice.price}</p>
-     <p>Mid Price: {midPrice}</p>
-     <p>Bid Spread: {bidSpread}</p>
+      {cards.map(data => {
+        console.log(data);
+       return  <Card name={data.name} data={data.value} currency={data.currency}/>
+       
+      })}
+  
      </div>
+     <span className='border-line'></span>
      <OrderBook />
 </div>
 
