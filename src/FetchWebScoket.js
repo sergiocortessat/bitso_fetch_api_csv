@@ -1,15 +1,17 @@
+/* eslint-disable max-len */
 import React, { useState, useEffect } from 'react';
 import FetchButton from './FetchButton';
+
 const OrderBook = () => {
   const [orders, setOrders] = useState([]);
   const currencyPair = 'btc_mxn';
-  const types = 'trades'
+  const types = 'trades';
 
   useEffect(() => {
     const websocket = new WebSocket('wss://ws.bitso.com');
 
-    websocket.onopen = function() {
-        websocket.send(JSON.stringify({ action: 'subscribe', book: currencyPair, type: types }));
+    websocket.onopen = () => {
+      websocket.send(JSON.stringify({ action: 'subscribe', book: currencyPair, type: types }));
     };
 
     websocket.onmessage = (event) => {
@@ -17,10 +19,10 @@ const OrderBook = () => {
       if (data.type === types && data.payload) {
         const time = new Date().toLocaleString();
 
-        const dataArray = [...data.payload, time] 
-        setOrders((prev) => [...prev,dataArray]);
-
-    }};
+        const dataArray = [...data.payload, time];
+        setOrders((prev) => [...prev, dataArray]);
+      }
+    };
 
     websocket.onclose = () => {
       websocket.close();
@@ -30,24 +32,28 @@ const OrderBook = () => {
       websocket.close();
     };
   }, [orders.length]);
-  
+
   return (
-      <div className="order-container">
-        {(orders.length >4 && <FetchButton data={orders} currencyPair={currencyPair}/>) || (<button className='download' disabled='true'>Waiting Trades</button>)}
-        <div className='trades'>
-        <h3>Trades in {currencyPair.toUpperCase()}</h3>
+    <div className="order-container">
+      {(orders.length > 4 && <FetchButton data={orders} currencyPair={currencyPair} />) || (<button type="button" className="download" disabled="true">Waiting Trades</button>)}
+      <div className="trades">
+        <h3>
+          Trades in
+          {' '}
+          {currencyPair.toUpperCase()}
+        </h3>
         {orders.length < 1 && <p>Waiting for a trade...</p>}
         <ul>
-     {orders.map((data) => (
-             <li key={data[0].i}>
-                 <p>{'[' + data[0]['i'] + '] ' + data[0]['a'] + ' BTC @ ' + data[0]['r'] + ' MXN = ' + data[0]['v'] + ' MXN ' + 'Date: ' + data[1]}</p>
-                 <span>---------------------------------------------------------------------------------------------------------------</span>
-                 <br/>
-                 <br/>
-             </li>
-         ))}
-     </ul>
-</div>
+          {orders.map((data) => (
+            <li key={data[0].i}>
+              <p>{`[${data[0].i}] ${data[0].a} BTC @ ${data[0].r} MXN = ${data[0].v} MXN Date: ${data[1]}`}</p>
+              <span>---------------------------------------------------------------------------------------------------------------</span>
+              <br />
+              <br />
+            </li>
+          ))}
+        </ul>
+      </div>
 
     </div>
   );
