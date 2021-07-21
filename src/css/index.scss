@@ -73,6 +73,7 @@
   h3 {
     font-size: 2.5em;
     margin: 15px 0;
+    text-align: center;
   }
 
   ul {
@@ -150,5 +151,9 @@
 
   .trades {
     align-items: flex-start;
+
+    h3 {
+      text-align: left;
+    }
   }
 }
