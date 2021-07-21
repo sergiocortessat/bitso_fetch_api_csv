@@ -26,7 +26,7 @@ function FetchButton({ data, currencyPair }) {
   };
   return (
     <button className="download" type="button" onClick={fetchCSV}>
-      Download Trades
+      Download trades
       {' '}
       {currencyPair.toUpperCase()}
     </button>

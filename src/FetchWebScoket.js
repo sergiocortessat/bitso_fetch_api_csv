@@ -36,7 +36,16 @@ const OrderBook = () => {
 
   return (
     <div className="order-container">
-      {(orders.length > 4 && <FetchButton data={orders} currencyPair={currencyPair} />) || (<button type="button" className="download" disabled="true">Waiting Trades</button>)}
+      {(orders.length > 4 && <FetchButton data={orders} currencyPair={currencyPair} />) || (
+      <button type="button" className="download download-disabled" disabled="true">
+        Waiting for
+        {' '}
+        {5 - orders.length}
+        {' '}
+        more trade
+        {orders.length === 4 ? '' : 's'}
+      </button>
+      )}
       <div className="trades">
         <h3>
           Trades in

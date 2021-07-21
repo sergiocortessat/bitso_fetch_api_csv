@@ -17,7 +17,7 @@ function App() {
   const currentCurrency = fetchCurrency.split('_')[1].toUpperCase();
   const cards = [
     {
-      name: 'Bid Size', value: bidSize.amount, currency: currentCurrency, key: '1',
+      name: 'Bid Size', value: bidSize.amount, currency: 'Units', key: '1',
     },
     {
       name: 'Bid Price', value: bidPrice.price, currency: currentCurrency, key: '2',

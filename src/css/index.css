@@ -137,6 +137,11 @@
   background: #098300 none repeat scroll 0% 0%;
 }
 
+.download-disabled {
+  background: #098300 !important;
+  cursor: wait;
+}
+
 .typewritter {
   font-size: 1.5rem;
   display: -webkit-box;

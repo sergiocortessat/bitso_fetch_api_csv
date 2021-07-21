@@ -105,6 +105,11 @@
   background: rgb(9, 131, 0) none repeat scroll 0% 0%;
 }
 
+.download-disabled {
+  background: rgb(9, 131, 0) !important;
+  cursor: wait;
+}
+
 .typewritter {
   font-size: 1.5rem;
   display: flex;
