@@ -96,9 +96,9 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .trades h3 {
@@ -175,6 +175,11 @@
 @media (min-width: 560px) {
   .typewritter {
     font-size: 2.5rem;
+  }
+  .trades {
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
   }
 }
 /*# sourceMappingURL=index.css.map */
