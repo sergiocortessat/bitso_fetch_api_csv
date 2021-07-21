@@ -44,6 +44,7 @@
 
 ## About The Project
 
+The Bitso api page allows user to get information over btc_brl most relevant data. As well it feeds a constant trading feed of btc_mxn latest trades
 
 
 <br />
@@ -63,16 +64,16 @@ Terminal or similar to execute the program.
 
 ## Clone project
 - To get a local copy up and running follow these simple example steps.
-- Clone this repository with git clone ```https://github.com/sergiocortessat/React-scs-movie-database``` using your terminal or command line.
-- Change to the project directory by entering: ```cd React-scs-movie-database``` in the terminal.
+- Clone this repository with git clone ```https://github.com/sergiocortessat/bitso_fetch_api_csv``` using your terminal or command line.
+- Change to the project directory by entering: ```cd bitso_fetch_api_csv``` in the terminal.
 - Enter the command npm i
 - Enter the project folder and run locally by using npm start.
 
 ## Command line steps
 ```
-- $ git clone `$ git clone https://github.com/sergiocortessat/React-scs-movie-database/
+- $ git clone `$ https://github.com/sergiocortessat/bitso_fetch_api_csv
 - $ git checkout develop
-- $ cd React-scs-movie-database
+- $ cd bitso_fetch_api_csv
 - $ npm i
 - $ npm start
 ```
@@ -106,6 +107,8 @@ The testing has been performed using Jest Framework.
 ## Acknowledgements
 
 * [Microverse](https://www.microverse.org/)
+* [Bitso](https://bitso.com/api_info)
+
 
 ## 📝 License
 

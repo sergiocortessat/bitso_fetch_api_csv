@@ -1,4 +1,5 @@
 {
+  "homepage": "https://bitso-api-fetch.netlify.app",
   "name": "bitso_api_fetch",
   "version": "0.1.0",
   "private": true,

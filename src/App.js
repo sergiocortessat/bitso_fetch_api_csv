@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import Typewriter from 'typewriter-effect';
 import OrderBook from './FetchWebScoket';
 import Card from './Card';
+import API from './API';
 
-const currentCurrency = 'btc_brl';
-const URLBRL = `https://api.bitso.com/v3/order_book/?book=${currentCurrency}`;
+const fetchCurrency = 'btc_brl';
 
 function App() {
   const [bidSize, setBidSize] = useState({});
@@ -14,80 +14,39 @@ function App() {
   const [midPrice, setMidPrice] = useState();
   const [bidSpread, setBidSpread] = useState();
 
-  const fetching = async () => {
-    try {
-      const data = await fetch(URLBRL, {
-        method: 'GET',
-        mode: 'cors',
-      });
-      const fetchData = await data.json();
-      const bestBidSizes = fetchData.payload.bids.sort(
-        (a, b) => a.amount - b.amount,
-      );
-      const bestBidSize = bestBidSizes[bestBidSizes.length - 1];
-      setBidSize(bestBidSize);
-      const bestBidPrices = fetchData.payload.bids.sort(
-        (a, b) => a.price - b.price,
-      );
-      const bestBidPrice = bestBidPrices[bestBidPrices.length - 1];
-      setBidPrice(bestBidPrice);
-      const bestAskSizes = fetchData.payload.asks.sort(
-        (a, b) => a.amount - b.amount,
-      );
-      const bestAskSize = bestAskSizes[bestAskSizes.length - 1];
-      setAskSize(bestAskSize);
-      const bestAskPrices = fetchData.payload.asks.sort(
-        (a, b) => a.price - b.price,
-      );
-      const bestAskPrice = bestAskPrices[bestAskPrices.length - 1];
-      setAskPrice(bestAskPrice);
-
-      const midPrice = bestBidPrices.reduce((acc, b) => acc + Number(b.price), 0)
-        / bestBidPrices.length;
-      setMidPrice(midPrice);
-
-      const askBidSpread = bestAskSize.price - bestBidSize.price;
-      setBidSpread(askBidSpread);
-
-      return {
-        bestBidSize,
-        bestBidPrice,
-        bestAskSize,
-        bestAskPrice,
-        midPrice,
-        askBidSpread,
-      };
-    } catch (error) {
-      console.log(error);
-      return error;
-    }
-  };
-
+  const currentCurrency = fetchCurrency.split('_')[1].toUpperCase();
   const cards = [
     {
-      name: 'Bid Size', value: bidSize.amount, currency: 'Units', key: '1',
+      name: 'Bid Size', value: bidSize.amount, currency: currentCurrency, key: '1',
     },
     {
-      name: 'Bid Price', value: bidPrice.price, currency: 'BRL', key: '2',
+      name: 'Bid Price', value: bidPrice.price, currency: currentCurrency, key: '2',
     },
     {
       name: 'Ask Size', value: askSize.amount, currency: 'Units', key: '3',
     },
     {
-      name: 'Ask Price', value: askPrice.price, currency: 'BRL', key: '4',
+      name: 'Ask Price', value: askPrice.price, currency: currentCurrency, key: '4',
     },
     {
-      name: 'Mid Price', value: midPrice, currency: 'BRL', key: '5',
+      name: 'Mid Price', value: midPrice, currency: currentCurrency, key: '5',
     },
     {
       name: 'Bid Spread', value: bidSpread, currency: 'BRL', key: '6',
     },
   ];
   useEffect(() => {
-    fetching();
-    return () => {
-      fetching.close();
-    };
+    API().then((data) => {
+      const {
+        bestBidSize, bestBidPrice, bestAskPrice, bestAskSize, midPrice, askBidSpread,
+      } = data;
+      setBidSize(bestBidSize);
+      setBidPrice(bestBidPrice);
+      setAskSize(bestAskSize);
+      setAskPrice(bestAskPrice);
+      setMidPrice(midPrice);
+      setBidSpread(askBidSpread);
+    });
   }, []);
 
   return (
@@ -105,7 +64,7 @@ function App() {
       <h2>
         General data for
         {' '}
-        {currentCurrency.toUpperCase()}
+        {currentCurrency}
       </h2>
       <div className="App-header">
         {cards.map((data) => (
