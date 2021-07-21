@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Typewriter from 'typewriter-effect';
 import OrderBook from './FetchWebScoket';
 import Card from './Card';
-import API from './API';
+import API from '../API';
 
 const fetchCurrency = 'btc_brl';
 
