@@ -130,3 +130,12 @@
   width: 65%;
   margin: 30px 0;
 }
+
+.loading-screen {
+  margin: 0 auto;
+  margin-top: 25px;
+
+  div svg {
+    color: rgb(41, 172, 0);
+  }
+}

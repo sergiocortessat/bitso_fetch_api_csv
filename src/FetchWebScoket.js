@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+import { CircularProgress } from '@material-ui/core';
 import React, { useState, useEffect } from 'react';
 import FetchButton from './FetchButton';
 
@@ -42,7 +43,9 @@ const OrderBook = () => {
           {' '}
           {currencyPair.toUpperCase()}
         </h3>
-        {orders.length < 1 && <p>Waiting for a trade...</p>}
+        <div className="loading-screen">
+          {orders.length < 1 && <CircularProgress color="secondary" />}
+        </div>
         <ul>
           {orders.map((data) => (
             <li key={data[0].i}>

@@ -151,4 +151,13 @@
   width: 65%;
   margin: 30px 0;
 }
+
+.loading-screen {
+  margin: 0 auto;
+  margin-top: 25px;
+}
+
+.loading-screen div svg {
+  color: #29ac00;
+}
 /*# sourceMappingURL=index.css.map */
