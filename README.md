@@ -7,7 +7,7 @@
 ## About The Project
 
 The app complies with PWA. Therefore it can be installed as mobile app using Chrome, Edge.
-The Bitso api page allows user to get information over btc_brl most relevant data. As well it feeds a constant trading feed of btc_mxn latest trades.
+The Bitso API page allows user to get information over btc_brl most relevant data. As well, it feeds a constant trading feed of btc_mxn the latest trades.
 
 ## Live Version
 
